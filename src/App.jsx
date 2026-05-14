@@ -12,6 +12,7 @@ export default function App() {
   const [loading, setLoading] = useState(false)
 
   const [history, setHistory] = useState([])
+  const [showAllHistory, setShowAllHistory] = useState(false)
   const [toast, setToast] = useState(null)
 
   const extractText = async () => {
@@ -191,6 +192,7 @@ setLoading(false)
             rounded-xl
             shadow-sm
             p-6
+            space-y-6
           ">
 
             {/* UPLOAD */}
@@ -242,34 +244,51 @@ setLoading(false)
 
             {loading && <Loader />}
 
-            {/* RESULT */}
+{/* RESULT CARD */}
 
-            {text && !loading && (
+{text && !loading && (
 
-              <div className="mt-10">
+  <div className="
+    mt-6
 
-                <div className="
-                  flex
-                  justify-between
-                  items-center
-                  mb-4
-                ">
+    bg-white/85
+    backdrop-blur-md
 
-                  <h2 className="
-                    text-2xl
-                    font-bold
-                    text-gray-800
-                  ">
-                    Extracted Text
-                  </h2>
+    border
+    border-gray-200
 
-                </div>
+    rounded-xl
 
-                <OCRResult text={text} />
+    shadow-sm
 
-              </div>
+    p-6
+  ">
 
-            )}
+    <div className="
+      flex
+      justify-between
+      items-center
+      mb-4
+    ">
+
+      <h2 className="
+        text-2xl
+        font-bold
+        text-gray-800
+      ">
+        Extracted Text
+      </h2>
+
+    </div>
+
+    <OCRResult
+      text={text}
+      setToast={setToast}
+    />
+
+  </div>
+
+)}
 
           </div>
 
@@ -333,7 +352,10 @@ setLoading(false)
 
               )}
 
-              {history.map((item, index) => (
+              {(showAllHistory
+                ? history
+                : history.slice(0, 4)
+                ).map((item, index) => (
 
                 <div
                   key={index}
@@ -395,6 +417,48 @@ setLoading(false)
                 </div>
 
               ))}
+
+              {/* SHOW MORE */}
+
+{history.length > 4 && (
+
+  <button
+    onClick={() =>
+      setShowAllHistory(
+        !showAllHistory
+      )
+    }
+
+    className="
+      w-full
+      mt-3
+
+      border
+      border-gray-200
+
+      hover:border-red-300
+      hover:bg-red-50
+
+      rounded-md
+
+      py-3
+
+      text-sm
+      font-semibold
+      text-gray-600
+
+      transition
+    "
+  >
+
+    {showAllHistory
+      ? '↑ Show Less'
+      : '↓ Show More'
+    }
+
+  </button>
+
+)}
 
             </div>
 

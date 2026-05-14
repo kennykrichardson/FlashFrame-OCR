@@ -256,3 +256,141 @@ img {
   box-shadow:
     0 12px 40px rgba(239,68,68,0.08);
 }
+
+/* SCANNER GRID */
+
+.scanner-grid {
+
+  background-image:
+
+    linear-gradient(
+      rgba(239,68,68,0.08) 1px,
+      transparent 1px
+    ),
+
+    linear-gradient(
+      90deg,
+      rgba(239,68,68,0.08) 1px,
+      transparent 1px
+    );
+
+  background-size: 24px 24px;
+}
+
+/* NANITE LOADER */
+
+.nanite-noise {
+
+  background-image:
+    radial-gradient(
+      rgba(255,255,255,0.12) 1px,
+      transparent 1px
+    );
+
+  background-size: 12px 12px;
+
+  animation:
+    naniteNoise 3s linear infinite;
+}
+
+@keyframes naniteNoise {
+
+  0% {
+    transform: translateY(0px);
+  }
+
+  100% {
+    transform: translateY(-12px);
+  }
+}
+
+/* GLITCH */
+
+.glitch-lines {
+
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      rgba(255,255,255,0.04) 1px,
+      transparent 2px
+    );
+
+  opacity: 0.35;
+
+  animation:
+    glitchMove 0.25s linear infinite;
+}
+
+@keyframes glitchMove {
+
+  0% {
+    transform: translateX(0px);
+  }
+
+  50% {
+    transform: translateX(1px);
+  }
+
+  100% {
+    transform: translateX(-1px);
+  }
+}
+
+/* SCAN BEAM */
+
+.scan-beam {
+
+  background:
+    linear-gradient(
+      to bottom,
+      transparent,
+      rgba(239,68,68,0.45),
+      transparent
+    );
+
+  height: 80px;
+
+  animation:
+    scanBeam 2s linear infinite;
+}
+
+@keyframes scanBeam {
+
+  0% {
+    transform: translateY(-120%);
+  }
+
+  100% {
+    transform: translateY(220%);
+  }
+}
+
+/* DOTS */
+
+.nanite-dots {
+
+  background-image:
+    radial-gradient(
+      rgba(239,68,68,0.2) 1px,
+      transparent 1px
+    );
+
+  background-size: 22px 22px;
+
+  animation:
+    nanitePulse 2s ease-in-out infinite;
+}
+
+@keyframes nanitePulse {
+
+  0%, 100% {
+
+    opacity: 0.3;
+  }
+
+  50% {
+
+    opacity: 0.7;
+  }
+}

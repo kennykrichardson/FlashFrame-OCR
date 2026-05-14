@@ -1,12 +1,20 @@
-export default function OCRResult({ text }) {
+export default function OCRResult({
+  text,
+  setToast,
+}) {
 
-  const copyText = async () => {
+ const copyText = async () => {
 
-    await navigator.clipboard.writeText(text)
+  await navigator.clipboard.writeText(text)
 
-    alert('Copied!')
-  }
+  setToast({
+    copied: true,
+  })
 
+  setTimeout(() => {
+    setToast(null)
+  }, 3000)
+}
   return (
 
     <div>
