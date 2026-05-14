@@ -109,16 +109,16 @@ No uploaded images are stored on servers.
 ## 📸 Screenshots
 
 ### Full Overview
-![Fullview](screenshots/fullview.png)
+![Fullview](screenshots/fullview_v2.png)
 
 ### Upload Box
-![Upload Box](screenshots/upload_box.png)
+![Upload Box](screenshots/upload_box_v2.png)
 
 ### History Box
-![History Box](screenshots/history_box.png)
+![History Box](screenshots/history_box_v2.png)
 
 ### Text Extract Box
-![Text Extract Box](screenshots/text_extract_box.png)
+![Text Extract Box](screenshots/text_extract_box_v2.png)
 
 ---
 
