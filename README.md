@@ -124,7 +124,7 @@ No uploaded images are stored on servers.
 
 ## 👨‍💻 Author
 
-Ken Richardson
+Kenny Richardson Kodipally
 
 ---
 
