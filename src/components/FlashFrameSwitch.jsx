@@ -119,7 +119,7 @@ const StyledWrapper = styled.div`
 .ff-label-right {
   right: 2.4em;
 
-  color: #92400e;
+  color: #b91c1c;
 
   font-weight: 900;
 
