@@ -4,6 +4,7 @@ import Tesseract from 'tesseract.js'
 import UploadBox from './components/UploadBox'
 import OCRResult from './components/OCRResult'
 import Loader from './components/Loader'
+import AnimatedButton from './components/AnimatedButton'
 
 export default function App() {
 
@@ -221,20 +222,15 @@ setLoading(false)
                 mt-6
               ">
 
-                <button
+                <AnimatedButton variant='primary'
                   onClick={extractText}
                   className="
-                    bg-yellow-100
-                    hover:bg-yellow-200
-                    text-yellow-700
-                    font-bold
-                    px-8
-                    py-4
-                    rounded-md
+                  text-bold
+                  text-9xl
                   "
                 >
                   ⚡ Extract Text
-                </button>
+                </AnimatedButton>
 
               </div>
 
