@@ -108,19 +108,15 @@ No uploaded images are stored on servers.
 
 ## 📸 Screenshots
 
-### Full Overview
-![Fullview](screenshots/fullview_v2.png)
+### FlashFrame Workspace Page
+![FlashFrame Workspace Page](screenshots/flashframe_workspace.jpeg)
 
-### Upload Box
-![Upload Box](screenshots/upload_box_v2.png)
-
-### History Box
-![History Box](screenshots/history_box_v2.png)
-
-### Text Extract Box
-![Text Extract Box](screenshots/text_extract_box_v2.png)
+### FlashFrame History Page
+![FlashFrame History Page](screenshots/flashframe_history.jpeg)
 
 ---
+
+## BB8 Toggle Switch Theme Credit - https://github.com/Galahhad
 
 ## 👨‍💻 Author
 
