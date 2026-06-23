@@ -5,6 +5,7 @@ import UploadBox from './components/UploadBox'
 import OCRResult from './components/OCRResult'
 import Loader from './components/Loader'
 import AnimatedButton from './components/AnimatedButton'
+import FlashFrameSwitch from './components/FlashFrameSwitch'
 
 export default function App() {
 
@@ -15,7 +16,7 @@ export default function App() {
   const [history, setHistory] = useState([])
   const [showAllHistory, setShowAllHistory] = useState(false)
   const [toast, setToast] = useState(null)
-
+  const [activeTab, setActiveTab] = useState('workspace')
   const extractText = async () => {
 
     if (!image) return
@@ -34,7 +35,14 @@ export default function App() {
     setHistory(prev => [
       {
         text: extractedText,
-        date: 'Just now',
+        date: new Date().toLocaleString('en-IN', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+})
       },
       ...prev
     ])
@@ -134,8 +142,8 @@ setLoading(false)
         <div className="text-center mb-10">
 
           <h1 className="
-            text-5xl
-            md:text-6xl
+            text-4xl
+            md:text-5xl
             font-extrabold
             tracking-tight
           ">
@@ -154,312 +162,280 @@ setLoading(false)
 
           </h1>
 
-          <p className="
-            mt-3
-            text-lg
-            font-medium
-            text-black-700
-          ">
-            <b>Lightning-fast text extraction powered by OCR.</b>
-          </p>
-
-          <p className="
-            mt-2
-            text-black-1000
-          ">
-            <b>An App by Ken Richardson.</b>
-          </p>
-
         </div>
+
+<div className="flex justify-center mb-8">
+
+  <FlashFrameSwitch
+    activeTab={activeTab}
+    setActiveTab={setActiveTab}
+  />
+
+</div>
 
         {/* LAYOUT */}
 
-        <div className="
-          max-w-7xl
-          mx-auto
-          grid
-          grid-cols-1
-          lg:grid-cols-[1fr_370px]
-          gap-6
-        ">
+<div className="max-w-5xl mx-auto">
 
-          {/* MAIN CARD */}
-
-          <div className="
-            bg-white/85
-            backdrop-blur-md
-            border
-            border-gray-200
-            rounded-xl
-            shadow-sm
-            p-6
-            space-y-6
-          ">
-
-            {/* UPLOAD */}
-
-            <div className="
-              border-2
-              border-dashed
-              border-red-300
-              rounded-xl
-              p-10
-            ">
-
-            <UploadBox
-              setImage={setImage}
-              setToast={setToast}
-            />
-            </div>
-
-            {/* BUTTON */}
-
-            {image && (
-
-              <div className="
-                flex
-                justify-center
-                mt-6
-              ">
-
-                <AnimatedButton variant='primary'
-                  onClick={extractText}
-                  className="
-                  text-bold
-                  "
-                >
-                  ⚡ Extract Text
-                </AnimatedButton>
-
-              </div>
-
-            )}
-
-            {/* LOADER */}
-
-            {loading && <div className="flex justify-center mb-8"><Loader /></div>}
-
-{/* RESULT CARD */}
-
-{text && !loading && (
-
-  <div className="
-    mt-6
-
-    bg-white/85
-    backdrop-blur-md
-
-    border
-    border-gray-200
-
-    rounded-xl
-
-    shadow-sm
-
-    p-6
-  ">
+  {activeTab === 'workspace' && (
 
     <div className="
-      flex
-      justify-between
-      items-center
-      mb-4
+      bg-white/85
+      backdrop-blur-md
+      border
+      border-gray-200
+      rounded-xl
+      shadow-sm
+      p-6
+      space-y-6
     ">
 
-      <h2 className="
-        text-2xl
-        font-bold
-        text-gray-800
+      {/* UPLOAD */}
+
+      <div className="
+        border-2
+        border-dashed
+        border-red-300
+        rounded-xl
+        p-10
       ">
-        Extracted Text
-      </h2>
+
+        <UploadBox
+          setImage={setImage}
+          setToast={setToast}
+        />
+
+      </div>
+
+      {/* BUTTON */}
+
+      {image && (
+
+        <div className="
+          flex
+          justify-center
+          mt-6
+        ">
+
+          <AnimatedButton
+            variant="primary"
+            onClick={extractText}
+          >
+            ⚡ Extract Text
+          </AnimatedButton>
+
+        </div>
+
+      )}
+
+      {/* LOADER */}
+
+      {loading && (
+
+        <div className="
+          flex
+          justify-center
+          mb-8
+        ">
+          <Loader />
+        </div>
+
+      )}
+
+      {/* RESULT */}
+
+      {text && !loading && (
+
+        <div className="
+          bg-white/60
+          border
+          border-gray-200
+          rounded-xl
+          p-6
+        ">
+
+          <h2 className="
+            text-2xl
+            font-bold
+            text-gray-800
+            mb-4
+          ">
+            Extracted Text
+          </h2>
+
+          <OCRResult
+            text={text}
+            setToast={setToast}
+          />
+
+        </div>
+
+      )}
 
     </div>
 
-    <OCRResult
-      text={text}
-      setToast={setToast}
-    />
+  )}
 
-  </div>
+  {activeTab === 'history' && (
 
-)}
+    <div className="
+      bg-white/85
+      backdrop-blur-md
+      border
+      border-gray-200
+      rounded-xl
+      shadow-sm
+      p-5
+    ">
 
+      <div className="
+        flex
+        justify-between
+        items-center
+        mb-5
+      ">
+
+        <h2 className="
+          text-2xl
+          font-extrabold
+          text-gray-800
+        ">
+          History
+        </h2>
+
+        <button
+          onClick={() => setHistory([])}
+          className="
+            text-red-500
+            hover:text-red-700
+            text-sm
+            font-semibold
+          "
+        >
+          Clear
+        </button>
+
+      </div>
+
+      <div className="space-y-4">
+
+        {history.length === 0 && (
+
+          <div className="
+            border
+            border-dashed
+            border-gray-300
+            rounded-md
+            p-8
+            text-center
+            text-gray-400
+          ">
+            No scans yet
           </div>
 
-          {/* SIDEBAR */}
+        )}
 
-          <aside className="
-            bg-white/85
-            backdrop-blur-md
-            border
-            border-gray-200
-            rounded-xl
-            shadow-sm
-            p-5
-            h-fit
-          ">
+        {(showAllHistory
+          ? history
+          : history.slice(0, 4)
+        ).map((item, index) => (
+
+          <div
+            key={index}
+            className="
+              border
+              border-gray-200
+              rounded-md
+              p-4
+              hover:border-red-300
+              transition
+            "
+          >
 
             <div className="
               flex
               justify-between
-              items-center
-              mb-5
+              items-start
+              gap-3
             ">
 
-              <h2 className="
-                text-2xl
-                font-extrabold
-                text-gray-800
-              ">
-                History
-              </h2>
+              <div className="flex-1">
+
+                <p className="
+                  font-semibold
+                  text-gray-800
+                  line-clamp-2
+                ">
+                  {item.text || 'No text found'}
+                </p>
+
+                <p className="
+                  text-sm
+                  text-gray-400
+                  mt-2
+                ">
+                  {item.date}
+                </p>
+
+              </div>
 
               <button
-                onClick={() => setHistory([])}
+                onClick={() => copyHistory(item.text)}
                 className="
-                  text-red-500
-                  hover:text-red-700
+                  border
+                  border-gray-200
+                  hover:border-red-300
+                  hover:bg-red-50
+                  px-3
+                  py-2
+                  rounded-md
                   text-sm
-                  font-semibold
                 "
               >
-                Clear
+                Copy
               </button>
 
             </div>
 
-            <div className="space-y-4">
+          </div>
 
-              {history.length === 0 && (
+        ))}
 
-                <div className="
-                  border
-                  border-dashed
-                  border-gray-300
-                  rounded-md
-                  p-8
-                  text-center
-                  text-gray-400
-                ">
-                  No scans yet
-                </div>
+        {history.length > 4 && (
 
-              )}
+          <button
+            onClick={() =>
+              setShowAllHistory(!showAllHistory)
+            }
+            className="
+              w-full
+              mt-3
+              border
+              border-gray-200
+              hover:border-red-300
+              hover:bg-red-50
+              rounded-md
+              py-3
+              text-sm
+              font-semibold
+              text-gray-600
+              transition
+            "
+          >
+            {showAllHistory
+              ? '↑ Show Less'
+              : '↓ Show More'}
+          </button>
 
-              {(showAllHistory
-                ? history
-                : history.slice(0, 4)
-                ).map((item, index) => (
+        )}
 
-                <div
-                  key={index}
-                  className="
-                    border
-                    border-gray-200
-                    rounded-md
-                    p-4
-                    hover:border-red-300
-                    transition
-                  "
-                >
+      </div>
 
-                  <div className="
-                    flex
-                    justify-between
-                    items-start
-                    gap-3
-                  ">
+    </div>
 
-                    <div className="flex-1">
+  )}
 
-                      <p className="
-                        font-semibold
-                        text-gray-800
-                        line-clamp-2
-                      ">
-                        {item.text || 'No text found'}
-                      </p>
-
-                      <p className="
-                        text-sm
-                        text-gray-400
-                        mt-2
-                      ">
-                        {item.date}
-                      </p>
-
-                    </div>
-
-                    <button
-                      onClick={() => copyHistory(item.text)}
-                      className="
-                        border
-                        border-gray-200
-                        hover:border-red-300
-                        hover:bg-red-50
-                        px-3
-                        py-2
-                        rounded-md
-                        text-sm
-                      "
-                    >
-                      Copy
-                    </button>
-
-                  </div>
-
-                </div>
-
-              ))}
-
-              {/* SHOW MORE */}
-
-{history.length > 4 && (
-
-  <button
-    onClick={() =>
-      setShowAllHistory(
-        !showAllHistory
-      )
-    }
-
-    className="
-      w-full
-      mt-3
-
-      border
-      border-gray-200
-
-      hover:border-red-300
-      hover:bg-red-50
-
-      rounded-md
-
-      py-3
-
-      text-sm
-      font-semibold
-      text-gray-600
-
-      transition
-    "
-  >
-
-    {showAllHistory
-      ? '↑ Show Less'
-      : '↓ Show More'
-    }
-
-  </button>
-
-)}
-
-            </div>
-
-          </aside>
-
-        </div>
+</div>
 
         {/* TOAST */}
 

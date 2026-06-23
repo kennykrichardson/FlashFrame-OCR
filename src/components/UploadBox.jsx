@@ -206,7 +206,7 @@ const handleChange = (e) => {
           }
         `}
       >
-        <b>Upload an Image</b>
+        <b>An App by Kenny Richardson</b>
       </p>
 
       {/* FORMATS */}
