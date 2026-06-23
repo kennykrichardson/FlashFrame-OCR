@@ -226,7 +226,6 @@ setLoading(false)
                   onClick={extractText}
                   className="
                   text-bold
-                  text-9xl
                   "
                 >
                   ⚡ Extract Text
