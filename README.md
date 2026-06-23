@@ -39,7 +39,7 @@ Extract text from images instantly with a clean, modern interface inspired by sp
 Clone the repository:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/flashframe-ocr.git
+git clone https://github.com/Ykennykrichardson/flashframe-ocr.git
 ```
 
 Go into the project:

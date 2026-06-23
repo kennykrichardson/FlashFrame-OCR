@@ -242,7 +242,7 @@ setLoading(false)
 
             {/* LOADER */}
 
-            {loading && <Loader />}
+            {loading && <div className="flex justify-center mb-8"><Loader /></div>}
 
 {/* RESULT CARD */}
 
